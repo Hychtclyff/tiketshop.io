@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.event-box,
+.event-card {
+  /* border: 1px solid red; */
+  /* color: rgb(218, 215, 215); */
+}
+
+.slide {
+  flex: 0 0 100%;
+  display: none;
+}
+
+.slide.active {
+  display: block;
+}
+/* 
+* {
+  border: solid 1px red;
+} */
