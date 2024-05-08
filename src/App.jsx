@@ -13,11 +13,11 @@ export default function App() {
     <Router>
       <Routes>
         {/* Pengalihan rute untuk root URL */}
-        <Route path="/tiketshop.io" element={<Navigate to="/home" />} />
+        <Route path="/" element={<Navigate to="/tiketshop.io" />} />
         {/* Rute-rute untuk halaman Home, Event, dan Ticket */}
-        <Route path="/home" element={<Home />} />
-        <Route path="/event" element={<Event />} />
-        <Route path="/ticket" element={<Ticket />} />
+        <Route path="/tiketshop.io" element={<Home />} />
+        <Route path="/tiketshop.io/event" element={<Event />} />
+        <Route path="/tiketshop.io/ticket" element={<Ticket />} />
       </Routes>
     </Router>
   );

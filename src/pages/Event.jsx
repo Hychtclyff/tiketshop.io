@@ -9,7 +9,7 @@ function Header() {
     <section className="px-56 py-5 pt-20">
       <div className="information flex justify-center ">
         <div className="information-img w-[50rem] rounded-xl overflow-hidden m-5 shadow-xl flex justify-center align-middle">
-          <img src="../../public/img/event1.jpg " alt="" className="" />
+          <img src="    /tiketshop.io/img/event1.jpg " alt="" className="" />
         </div>
         <div className="information-schedule w-96 h-96 bg-slate-200 m-5 p-10 shadow-xl rounded-2xl">
           <span>JUDUL</span>
@@ -116,7 +116,7 @@ function NavContent({ setActive, currentActive }) {
       <button
         className={
           currentActive
-            ? "border border-transparent border-b-1  border-b-slate-400 w-1/2  py-5 rounded-md transition-all duration-100 "
+            ? "border-2 border-transparent  border-b-1  border-b-slate-400 w-1/2  py-5 rounded-md transition-all duration-100 "
             : "border-8 border-transparent   border-b-4 border-b-blue-900 w-1/2  py-5 rounded-md transition-all duration-100  "
         }
         onClick={currentActive ? nextActive : undefined}
