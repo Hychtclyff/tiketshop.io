@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Navbar() {
+  const navigate =useNavigate();
   return (
     <nav className="flex flex-row justify-between  z-50 align-middle  px-10  py-5  bg-navy  ">
       <div className=" flex flex-row justify-start  ">
         <div className="logo flex">
-          <a href="/tiketshop.io" className="text-4xl text-white">
+          <a onClick={() => navigate("/tiketshop.io")} className="text-4xl text-white cursor-pointer" >
             TIKET
           </a>
         </div>

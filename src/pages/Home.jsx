@@ -4,6 +4,7 @@ import "../App.css";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import BoxEvent from "../components/BoxEvent";
+import { useNavigate } from "react-router-dom";
 
 function LazyLoad() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -89,6 +90,7 @@ function LazyLoad() {
 }
 
 function Event() {
+  const navigate = useNavigate();
   const [firstEvent, setFirstEvent] = useState(0);
   const [page, setPage] = useState(1);
 
@@ -133,12 +135,12 @@ function Event() {
         </div>
       </div>
       <div className="flex justify-center">
-        <a
-          href="/tiketshop.io/ticket"
+        <button
+          onClick={() => navigate("/tiketshop.io/ticket")}
           className="transition-all duration-300  p-3 bg-slate-100 border border-color2 border-solid rounded-lg hover:bg-color2 hover:text-white"
         >
           Selengkapnya
-        </a>
+        </button>
       </div>
     </section>
   );

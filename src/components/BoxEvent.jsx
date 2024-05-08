@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
+/* eslint-disable react/prop-types */
 export default function Event({ firstEvent, onEvent }) {
+  const navigate = useNavigate();
   const events = [
     { src: "/tiketshop.io/img/event1.jpg", alt: "event-1" },
     { src: "/tiketshop.io/img/event1.jpg", alt: "event-2" },
@@ -49,9 +53,9 @@ export default function Event({ firstEvent, onEvent }) {
         return (
           <a
             key={index}
-            href="/tiketshop.io/event"
+            onClick={() => navigate("/tiketshop.io/event")}
             style={{ transform: translateX }}
-            className={`transition-all duration-1000   event-card shrink-0 bg-gray-200 w-[20rem] h-[20rem] rounded-2xl overflow-hidden drop-shadow-lg mx-5`}
+            className={`transition-all duration-1000 cursor-pointer  event-card shrink-0 bg-gray-200 w-[20rem] h-[20rem] rounded-2xl overflow-hidden drop-shadow-lg mx-5`}
           >
             <header>
               <img src={event.src} alt={event.alt} className="w-[20rem] h-30" />
