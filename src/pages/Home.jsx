@@ -10,9 +10,9 @@ function LazyLoad() {
   const intervalDuration = 5000;
 
   const slides = [
-    { src: "../public/img/1710747974_EsrPUP.jpg", alt: "banner-1" },
-    { src: "../public/img/1710821381_3gvZ60.jpg", alt: "banner-2" },
-    { src: "../public/img/1711433074_WACB8D.jpg", alt: "banner-3" },
+    { src: "/tiketshop.io/img/1710747974_EsrPUP.jpg", alt: "banner-1" },
+    { src: "/tiketshop.io/img/1710821381_3gvZ60.jpg", alt: "banner-2" },
+    { src: "/tiketshop.io/img/1711433074_WACB8D.jpg", alt: "banner-3" },
   ];
 
   function nextSlide() {
