@@ -3,7 +3,7 @@ export default function Navbar() {
     <nav className="flex flex-row justify-between  z-50 align-middle  px-10  py-5  bg-navy  ">
       <div className=" flex flex-row justify-start  ">
         <div className="logo flex">
-          <a href="/" className="text-4xl text-white">
+          <a href="/tiketshop.io" className="text-4xl text-white">
             TIKET
           </a>
         </div>

@@ -49,7 +49,7 @@ export default function Event({ firstEvent, onEvent }) {
         return (
           <a
             key={index}
-            href="/event"
+            href="/tiketshop.io/event"
             style={{ transform: translateX }}
             className={`transition-all duration-1000   event-card shrink-0 bg-gray-200 w-[20rem] h-[20rem] rounded-2xl overflow-hidden drop-shadow-lg mx-5`}
           >

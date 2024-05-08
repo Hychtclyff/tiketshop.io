@@ -14,14 +14,6 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        {/* Pengalihan rute untuk root URL */}
-        <Route path="/" element={<Navigate to="/tiketshop.io" />} />
-        <Route path="/event" element={<Navigate to="/tiketshop.io/event" />} />
-        <Route
-          path="/ticket"
-          element={<Navigate to="/tiketshop.io/ticket" />}
-        />
-
         {/* Rute-rute untuk halaman Home, Event, dan Ticket */}
         <Route index path="/tiketshop.io" element={<Home />} />
         <Route path="/tiketshop.io/event" element={<Event />} />
