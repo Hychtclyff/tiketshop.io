@@ -134,7 +134,7 @@ function Event() {
       </div>
       <div className="flex justify-center">
         <a
-          href="/tiketshop.io/ticket"
+          href="/ticket"
           className="transition-all duration-300  p-3 bg-slate-100 border border-color2 border-solid rounded-lg hover:bg-color2 hover:text-white"
         >
           Selengkapnya
