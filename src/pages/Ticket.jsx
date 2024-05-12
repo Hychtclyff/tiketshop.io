@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -7,22 +8,47 @@ function Log() {
   console.log("okeeee");
 }
 
-function FilterList({ SetFilterIsOn, onFilter, nameFilter, data }) {
+function FilterList({
+  onFilter,
+  nameFilter,
+  data,
+  logoFilter,
+  setOpenFilter,
+  openFilter,
+}) {
   const [collapse, setCollapse] = useState(false);
 
   function handleFilter(key) {
     const currentFilters = data[key];
     onFilter(currentFilters);
   }
-
   return (
-    <div className="container text-center relative ">
+    <div className=" text-center relative ">
       <div className="name-filter py-3 flex justify-center text-left  ">
-        <h3>{nameFilter}</h3>
+        <div
+          className={`${
+            openFilter ? "handphone:block" : "handphone:hidden"
+          } desktop:block`}
+        >
+          {nameFilter}
+        </div>
+        <div
+          className={`${
+            openFilter ? "handphone:hidden" : "handphone:block"
+          } desktop:hidden handphone:block`}
+        >
+          <IconFilter open={setOpenFilter}>
+            <box-icon name={logoFilter}></box-icon>
+          </IconFilter>
+        </div>
       </div>
 
-      <div className="main-filter ">
-        <div className="icon-collapss absolute top-8  right-3 -translate-y-1/2    ">
+      <div className="main-filter  ">
+        <div
+          className={`${
+            openFilter ? "handphone:block" : "handphone:hidden"
+          } icon-collapss absolute top-8  right-3 -translate-y-1/2  desktop:block  `}
+        >
           <button className=" " onClick={() => setCollapse((open) => !open)}>
             {collapse ? (
               <box-icon type="solid" size="sm" name="chevron-up"></box-icon>
@@ -37,7 +63,11 @@ function FilterList({ SetFilterIsOn, onFilter, nameFilter, data }) {
             collapse ? "h-64 " : "h-0 "
           }`}
         >
-          <div className="overflow-hidden overflow-y-scroll overflow-x-hidden h-full my-">
+          <div
+            className={`${
+              openFilter ? "handphone:block" : "handphone:hidden"
+            } overflow-hidden overflow-y-scroll overflow-x-hidden h-full my-1 desktop:block`}
+          >
             <ul className="relative ">
               {data.map((data, key) => {
                 return (
@@ -62,35 +92,71 @@ function FilterList({ SetFilterIsOn, onFilter, nameFilter, data }) {
   );
 }
 
-function FilterIsTrue({ filters, onFilter, nameFilter, isFilter }) {
+function FilterIsTrue({
+  onFilter,
+  nameFilter,
+  isFilter,
+  openFilter,
+  setOpenFilter,
+  logoFilter,
+}) {
   function handleFilterIsTrue() {
     const currentFilter = false;
     onFilter(currentFilter);
   }
   return (
-    <div className="relative  px-10 p-3 rounded-lg  m-1 border-2 shadow-lg ">
-      <div>{nameFilter} </div>
-      <div className="font-bold">{isFilter}</div>
-      <div className="btn-close absolute top-1 right-5   rounded-full w-7 h-7 flex justify-center align-middle  text-red-500 text-2xl">
-        <button onClick={() => handleFilterIsTrue()}>x</button>
+    <>
+      <div
+        className={`relative  px-10 p-3 rounded-lg  m-1 border-2 shadow-lg ${
+          openFilter ? "handphone:block" : "handphone:hidden"
+        } desktop:block`}
+      >
+        <div>{nameFilter}</div>
+        <div className="font-bold">{isFilter}</div>
+        <div className="btn-close absolute top-1 right-5   rounded-full w-7 h-7 flex justify-center align-middle  text-red-500 text-2xl">
+          <button onClick={() => handleFilterIsTrue()}>x</button>
+        </div>
       </div>
-    </div>
+
+      <div>
+        <div
+          className={`${
+            openFilter ? "handphone:hidden" : "handphone:block"
+          } desktop:hidden handphone:block flex justify-center`}
+        >
+          <IconFilter open={setOpenFilter}>
+            <box-icon name={logoFilter} color="blue"></box-icon>
+          </IconFilter>
+        </div>
+      </div>
+    </>
   );
 }
+
 function Filter() {
   const [useFilter, setUseFilter] = useState(Array(3).fill(false));
   const [collapse, setCollapse] = useState(false);
   const [filterIsOn, SetFilterIsOn] = useState(false);
+  const [openFilter, setOpenFilter] = useState(false);
   const Filters = [
-    { name: "Lokasi", data: ["Jakarta", "Padang", "Medan", "Bandung"] },
-    { name: "Waktu", data: ["Pagi", "Siang", "Sore", "Malam"] },
-    { name: "Harga", data: ["Berbayar", "Gratis"] },
+    {
+      name: "Lokasi",
+      logo: `map`,
+      data: ["Jakarta", "Padang", "Medan", "Bandung"],
+    },
+    { name: "Waktu", logo: "time", data: ["Pagi", "Siang", "Sore", "Malam"] },
+    { name: "Harga", logo: "wallet", data: ["Berbayar", "Gratis"] },
   ];
 
   function onFilter(filter, key) {
     const onFilter = useFilter.slice();
     onFilter[key] = filter;
     setUseFilter(onFilter);
+  }
+
+  function handleClose() {
+    setOpenFilter((open) => !open);
+    setCollapse((open) => !open);
   }
 
   const listFilters = Filters.map((aFilter, i) => {
@@ -102,32 +168,85 @@ function Filter() {
             isFilter={useFilter[i]}
             onFilter={(filter) => onFilter(filter, i)}
             data={aFilter.data}
+            openFilter={openFilter}
+            logoFilter={aFilter.logo}
+            SetFilterIsOn={SetFilterIsOn}
           />
         ) : (
           <FilterList
             nameFilter={aFilter.name}
+            setOpenFilter={setOpenFilter}
+            logoFilter={aFilter.logo}
             SetFilterIsOn={SetFilterIsOn}
-            onFilter={(filter) => onFilter(filter, guti)}
+            openFilter={openFilter}
+            onFilter={(filter) => onFilter(filter, i)}
             data={aFilter.data}
           />
         )}
       </div>
     );
   });
-
   return (
-    <div className="relative container w-1/4 border border-slate-500 px-10 py-5 ">
-      <div className="sticky top-10">
-        <header className="text-center font-bold text-2xl">
-          <h3>Filter</h3>
-        </header>
-        <main>
-          <div className="list-filter  ">{listFilters}</div>
-        </main>
+    <div
+      className={`${
+        openFilter ? "handphone:w-1/2" : "handphone:w-10"
+      } relative container desktop:w-1/4  border border-slate-500 handphone:p-0 transition-all desktop:px-10 py-5 overflow-hidden `}
+    >
+      <div className="button-close sticky top-10 ">
+        <div
+          className={`relative p-2 desktop:hidden ${
+            openFilter ? "handphone:block" : "handphone:hidden"
+          }`}
+        >
+          <button
+            onClick={handleClose}
+            className="absolute -top-2 right-3 text-red-400 font-bold text-2xl"
+          >
+            x
+          </button>
+        </div>
+
+        <div>
+          <header className="text-center font-bold text-2xl ">
+            <div
+              className={`${
+                openFilter ? "handphone:block" : "handphone:hidden"
+              }  desktop:block `}
+            >
+              Filter
+            </div>
+            <div
+              className={`${
+                openFilter ? "handphone:hidden" : "handphone:block"
+              }  desktop:hidden`}
+            >
+              <IconFilter open={setOpenFilter}>
+                <box-icon name="filter"></box-icon>
+              </IconFilter>
+            </div>
+          </header>
+          <main>
+            <div className={`list-filter`}>{listFilters}</div>
+          </main>
+        </div>
       </div>
     </div>
   );
 }
+
+function IconFilter({ children, open }) {
+  return (
+    <>
+      <button
+        onClick={() => open((open) => !open)}
+        className={` py-2  rounded-lg px-2 `}
+      >
+        {children}
+      </button>
+    </>
+  );
+}
+
 function Content() {
   const [firstEvent, setFirstEvent] = useState(0);
   function maxpage(event) {
@@ -135,11 +254,12 @@ function Content() {
   }
 
   return (
-    <div className=" w-full  grid grid-cols-4 grid-flow-row gap-10 p-10  ">
+    <div className=" w-full   desktop:grid-cols-3 tablet:grid-cols-2 handphone:grid-cols-1 grid-flow-row  handphone:gap-5  handphone:py-5  grid ">
       <BoxEvent firstEvent={firstEvent} onEvent={maxpage} />
     </div>
   );
 }
+
 function Body() {
   return (
     <div className="Body flex  ">
@@ -151,10 +271,10 @@ function Body() {
 
 export default function Ticket() {
   return (
-    <>
+    <div className="overflow-hidden">
       <Navbar />
       <Body />
       <Footer />
-    </>
+    </div>
   );
 }

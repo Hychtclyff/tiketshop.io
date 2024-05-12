@@ -58,8 +58,8 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-        <div className="about p-5 bg-color4">
-          <ul className="flex justify-center">
+        <div className="about p-5  bg-color4">
+          <ul className="desktop:flex justify-center handphone:grid grid-rows-4 grid-flow-col gap-4  ">
             <li className="m-1 hover:text-white">
               <a href="">Tentang Kami</a>
             </li>

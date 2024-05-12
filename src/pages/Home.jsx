@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import "boxicons";
 import "../App.css";
@@ -36,20 +37,26 @@ function LazyLoad() {
   }, [currentSlide]);
 
   return (
-    <section className="px-56 py-10 pt-20">
-      <div className="lazy-loaded relative group ">
-        <div className="banner-box relative rounded-2xl overflow-hidden flex flex-row ">
+    <section className="desktop:px-56 py-10 pt-20 handphone:px-5 tablet:px-28">
+      <div className="lazy-loaded  relative  group   ">
+        <div className="banner-box  rounded-2xl overflow-hidden flex flex-row ">
           {slides.map((slide, index) => {
             return (
               <div
                 key={index}
-                className={
-                  index == currentSlide
-                    ? "block  animate-[opacity_1s] w-[102rem] h-[20rem]  "
-                    : "opacity-0 hidden transition-all duration-1000"
-                }
+                className={` 
+                 ${
+                   index == currentSlide
+                     ? "block  animate-[opacity_1s] w-fit   "
+                     : "opacity-0 hidden transition-all duration-1000"
+                 }
+              `}
               >
-                <img src={slide.src} alt={slide.alt} />
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
+                  className="handphone:h-36 desktop:h-fit"
+                />
               </div>
             );
           })}
@@ -95,13 +102,13 @@ function Event() {
   const [page, setPage] = useState(1);
 
   const eventsPerPage = 4;
-  const maxpage = (events) => Math.ceil(events.length / eventsPerPage);
+  const maxpage = (events) => (events.length);
 
   function nextEvent() {
     if (page >= maxpage) {
       return;
     } else {
-      setFirstEvent(firstEvent - 90);
+      setFirstEvent(firstEvent - 22);
       setPage(page + 1);
     }
   }
@@ -109,15 +116,15 @@ function Event() {
     if (firstEvent == 0) {
       return;
     } else {
-      setFirstEvent(firstEvent + 90);
+      setFirstEvent(firstEvent + 23);
       setPage(page - 1);
     }
   }
 
   return (
-    <section className="px-56 py-10 pt-5">
-      <h1 className="font-bold text-5xl my-5">Event</h1>
-      <div className="event-box flex relative   rounded-3xl   p-5  overflow-hidden group">
+    <section className="desktop:px-56 py-10 pt-5 handphone:px-0 tablet:px-28">
+      <h1 className="font-bold text-5xl my-5 handphone:px-5 desktop:px-0">Event</h1>
+      <div className="event-box flex relative   rounded-3xl p-5 overflow-hidden group">
         <BoxEvent firstEvent={firstEvent} onEvent={maxpage} />
         <div className="btn-nav">
           <button
@@ -137,7 +144,7 @@ function Event() {
       <div className="flex justify-center">
         <button
           onClick={() => navigate("/tiketshop.io/ticket")}
-          className="transition-all duration-300  p-3 bg-slate-100 border border-color2 border-solid rounded-lg hover:bg-color2 hover:text-white"
+          className="transition-all duration-300 p-3 bg-slate-100 border border-color2 border-solid rounded-lg hover:bg-color2 hover:text-white"
         >
           Selengkapnya
         </button>
@@ -148,11 +155,11 @@ function Event() {
 
 export default function Home() {
   return (
-    <>
+    <div className="overflow-hidden">
       <Navbar />
       <LazyLoad />
       <Event />
       <Footer />
-    </>
+    </div>
   );
 }
